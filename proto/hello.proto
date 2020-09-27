@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package Comments;
+
+message HelloRequest {
+    int64 Id = 1;
+}
+
+message HelloResponse {
+    string Name = 1;
+}
+
+service Hello {
+    rpc HelloName (HelloRequest) returns (HelloResponse){}
+}
