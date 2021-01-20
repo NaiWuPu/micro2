@@ -1,23 +1,7 @@
-# micro2 AND etcd demo
-
-## GET proto.go
+###阅读顺序 
 ```cmd
-protoc --go_out=. --micro_out=. ./proto/hello.proto
-```
-
-
-## service
-```
-go run service.go
-```
-
-## Linux->etcd
-```
-micro --registry=etcd --registry_address=180.76.233.214:2379 list services
-```
-
-micro 2.0 goBin
-```
-链接：https://pan.baidu.com/s/1rvO_lHAVIVjwjjWEi7SzMA 
-提取码：u5pu
+micro2Demo
+microDemo
+microProto
+go-micro-grpc
 ```
