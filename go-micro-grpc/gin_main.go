@@ -15,7 +15,7 @@ func main() {
 
 	microService := micro.NewService(micro.Name("microDaHaoRenService"),
 		micro.WrapClient(logWapper.NewLogWrapper))
-	proService := Services.NewProdService("prodService", microService.Client())
+	proService := Services.NewProdService("prodService.client", microService.Client())
 
 	HttpServer := web.NewService(
 		web.Name("httpDaHaoRenService"),
@@ -26,5 +26,6 @@ func main() {
 		web.Metadata(map[string]string{"protocol": "http"}))
 
 	HttpServer.Init()
+
 	HttpServer.Run()
 }

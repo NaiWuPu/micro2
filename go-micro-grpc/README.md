@@ -6,3 +6,8 @@ https://github.com/micro/go-plugins/tree/master/wrapper
 ```cmd
 https://github.com/afex/hystrix-go
 ```
+### 使用方式
+```cmd
+server 端：go run main
+client端：go run gin_main.go
+```
