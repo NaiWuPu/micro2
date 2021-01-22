@@ -11,6 +11,8 @@ func NewGinRouter(prodService Services.ProdService) *gin.Engine {
 	v1Group := ginRouter.Group("v1")
 	{
 		v1Group.Handle("GET", "/prods", GetProdList)
+		v1Group.Handle("GET", "/prods1", GetProdList1)
+
 	}
 
 	return ginRouter

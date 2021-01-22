@@ -8,12 +8,14 @@ import (
 	"micro2/go-micro-grpc/Services"
 )
 
+// 服务端注册了 prodService.clien 负责返回接收值
 func main() {
 	etcdReg := etcd.NewRegistry(registry.Addrs("8.136.142.17:2379"))
 
+	// 注册服务
 	prodService := micro.NewService(
 		micro.Name("prodService.client"),
-		micro.Registry(etcdReg)) // 修饰，中间件
+		micro.Registry(etcdReg))
 
 	prodService.Init()
 	_ = Services.RegisterProdServiceHandler(prodService.Server(), new(ServiceImpl.ProdService))
