@@ -16,14 +16,19 @@ func (c *prodWrapper) Call(ctx context.Context, req client.Request, rsp interfac
 	cmdName := req.Service() + "." + req.Endpoint()
 
 	configA := hystrix.CommandConfig{
-		Timeout: 1000,
+		Timeout: 2000,				// 超时时间则进入降级
+		ErrorPercentThreshold: 2,	// 可执行次数，否则执行熔断
+		RequestVolumeThreshold: 50,	// 容忍百分比还是失败则熔断，一次熔断
+		SleepWindow: 5000,			// 熔断器再次开启
 	}
-	hystrix.ConfigureCommand("suibian1", configA)
+
+	hystrix.ConfigureCommand("随便取个名", configA)
 
 	return hystrix.Do(cmdName, func() error {
 		return c.Client.Call(ctx, req, rsp)
 	}, func(err error) error { // 降级使用
-		defaultProds(rsp)
+		//defaultProds(rsp)
+		defaultData(rsp)
 		return nil
 	})
 }
@@ -45,4 +50,13 @@ func defaultProds(rsp interface{}) {
 		models = append(models, NewProd(100+i, "dahaoren"+strconv.Itoa(int(i))))
 	}
 	res.Data = models
+}
+func defaultData(rsp interface{}) {
+	switch rsp.(type) {
+	case *Services.ProdListResponse:
+		defaultProds(rsp)
+		// 如果有不同的返回值类型则...
+	//case *Services.:
+	//	NewProd(100+t.ProdId, "dahaoren"+strconv.Itoa(int(t.ProdId)))
+	}
 }

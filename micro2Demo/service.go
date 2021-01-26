@@ -20,7 +20,7 @@ func (h Hello) HelloName(ctx context.Context, in *pb.HelloRequest, out *pb.Hello
 
 func main() {
 
-	etcdReg := etcd.NewRegistry(registry.Addrs("180.76.233.214:2379")) //注册服务到etcd中
+	etcdReg := etcd.NewRegistry(registry.Addrs("8.136.142.17:2379")) //注册服务到etcd中
 
 	service := micro.NewService(
 		micro.Name("hello"),

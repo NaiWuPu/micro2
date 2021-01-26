@@ -31,6 +31,6 @@ func main() {
 		web.Handler(Weblib.NewGinRouter(proService)),
 		web.Metadata(map[string]string{"protocol": "http"}))
 
-	HttpServer.Init()
-	HttpServer.Run()
+	_ = HttpServer.Init()
+	_ = HttpServer.Run()
 }
