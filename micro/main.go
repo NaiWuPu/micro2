@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
@@ -12,12 +13,12 @@ func main() {
 	etcdReg := etcd.NewRegistry(registry.Addrs("8.136.142.17:2379"))
 
 	myService := micro.NewService(
-		micro.Name("test"),
-		micro.Address(":8001"),
+		micro.Name("api.wuzi.com.test"),
+		micro.Address("127.0.0.1:8002"),
 		micro.Registry(etcdReg))
 
-	myService.Init()
-	_ = services.RegisterTestServiceHandler(myService.Server(), new(ServiceImpl.TestService))
-
-	_ = myService.Run()
+	err := services.RegisterTestServiceHandler(myService.Server(), new(ServiceImpl.TestService))
+	fmt.Println(err)
+	err = myService.Run()
+	fmt.Println(err)
 }
